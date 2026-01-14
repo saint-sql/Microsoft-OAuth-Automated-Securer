@@ -31,16 +31,16 @@
   + Lists all authorized OAuth apps
 
 - Secure login via Microsoft Device Code flow
-  + Uses Microsoft Azure OAuth and Tenant ID
-  + No passwords are ever stored
+   + Uses Microsoft Azure OAuth and Tenant ID
+   + No passwords are ever stored
     
 - Token caching
- + Saves login token locally for convenience
- + Automatically refreshes when needed
+  + Saves login token locally for convenience
+  + Automatically refreshes when needed
    
 - Export audit reports to JSON
-+ Can save and share reports easily
-+ Keeps a record of account audit history
+  + Can save and share reports easily
+  + Keeps a record of account audit history
 
 - GUI EXE for Windows (built with PyInstaller)
   + Simple, easy-to-use interface
