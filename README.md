@@ -77,3 +77,7 @@ python saintsecure.py
 Download the EXE from the Releases tab.
 Double-click to run — no Python needed.
 
+# Disclaimer
+
+Use at your own risk, not liable for any misuse
+
