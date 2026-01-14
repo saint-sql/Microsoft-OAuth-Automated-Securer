@@ -7,7 +7,7 @@ init(autoreset=True)
 
 def main():
     print(Fore.CYAN + "=== AutoSecure (Max Level Safe Edition) ===")
-    token = get_token()  # Microsoft login once
+    token = get_token()  
 
     while True:
         print(Fore.BLUE + """

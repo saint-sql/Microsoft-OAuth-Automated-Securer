@@ -11,16 +11,16 @@ from colorama import init, Fore
 
 init(autoreset=True)
 
-# -------------------------------
-# CONFIG
+
+# Config
 CLIENT_ID = "YOUR_CLIENT_ID_HERE"
 TENANT = "consumers"
 SCOPES = ["User.Read"]
 TOKEN_CACHE_FILE = "token_cache.json"
 GRAPH = "https://graph.microsoft.com/v1.0"
 
-# -------------------------------
-# AUTHENTICATION
+
+# OAuth
 
 def get_token():
     """Obtain Microsoft token, with caching."""
@@ -34,28 +34,27 @@ def get_token():
         token_cache=cache
     )
 
-    # Try silent login first
+    
     accounts = app.get_accounts()
     if accounts:
         result = app.acquire_token_silent(SCOPES, account=accounts[0])
         if result and "access_token" in result:
             return result["access_token"]
 
-    # Device code flow
+    
     flow = app.initiate_device_flow(scopes=SCOPES)
     if "user_code" not in flow:
         raise Exception("Failed to create device flow")
 
-    # Open browser automatically
+   
     webbrowser.open(flow['verification_uri'])
-    # Copy code to clipboard
+    
     pyperclip.copy(flow['user_code'])
 
     # Return flow and app for GUI to handle
     return flow, app
 
-# -------------------------------
-# AUDIT FUNCTIONS
+
 
 def audit_account(token, export=False):
     headers = {"Authorization": f"Bearer {token}"}
@@ -98,8 +97,7 @@ def audit_account(token, export=False):
 
     return "\n".join(info)
 
-# -------------------------------
-# GUI CLASS
+
 
 class AutoSecureGUI:
     def __init__(self, root):
@@ -114,30 +112,29 @@ class AutoSecureGUI:
         style.configure('TButton', font=('Arial', 12))
         style.configure('TLabel', font=('Arial', 12))
 
-        # Tabs
+        
         self.tabs = ttk.Notebook(root)
         self.tab_audit = ttk.Frame(self.tabs)
         self.tabs.add(self.tab_audit, text="Audit")
         self.tabs.pack(expand=1, fill="both")
 
-        # Login Button
+        
         self.login_btn = ttk.Button(self.tab_audit, text="Login with Microsoft", command=self.login)
         self.login_btn.pack(pady=10)
 
-        # Audit Output
+        
         self.audit_output = scrolledtext.ScrolledText(self.tab_audit, width=95, height=25, state=tk.DISABLED)
         self.audit_output.pack(padx=10, pady=5)
 
-        # Full Audit Button
+        
         self.full_audit_btn = ttk.Button(self.tab_audit, text="Run Full Security Audit", command=self.run_full_audit, state=tk.DISABLED)
         self.full_audit_btn.pack(pady=5)
 
-    # -------------------------------
-    # Thread helper
+    
+    
     def run_in_thread(self, func):
         Thread(target=func, daemon=True).start()
 
-    # -------------------------------
     # LOGIN
     def login(self):
         self.run_in_thread(self._login)
@@ -172,8 +169,8 @@ class AutoSecureGUI:
     def enable_buttons(self):
         self.full_audit_btn.config(state=tk.NORMAL)
 
-    # -------------------------------
-    # RUN FULL AUDIT
+ 
+    
     def run_full_audit(self):
         self.run_in_thread(self._run_full_audit)
 
@@ -190,5 +187,5 @@ class AutoSecureGUI:
 # -------------------------------
 if __name__ == "__main__":
     root = tk.Tk()
-    app = AutoSecureGUI(root)
+    app = SaintSecureGUI(root)
     root.mainloop()

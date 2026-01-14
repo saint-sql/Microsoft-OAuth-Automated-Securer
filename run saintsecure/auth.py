@@ -5,7 +5,7 @@ CLIENT_ID = "7a0d014c-7c24-46c6-8cde-a725bdd9d1f1"
 
 AUTHORITY = "https://login.microsoftonline.com/consumers"
 
-# Only include non-reserved scopes
+
 SCOPES = [
     "User.Read"
 ]
@@ -16,7 +16,7 @@ def get_token():
         authority=AUTHORITY
     )
 
-    # Start Device Code Flow
+   
     flow = app.initiate_device_flow(scopes=SCOPES)
     if "user_code" not in flow:
         raise Exception("Failed to create device flow")
