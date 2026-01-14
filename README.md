@@ -2,7 +2,7 @@
   <img src="https://avatars.githubusercontent.com/u/231521105?s=400&u=7a1e25fdf7a1b5e1b4872ada8b595a9d859c0f26&v=4" width="180" alt="Profile Picture"/>
 </p>
 
-<h1 align="center">Securer</h1>
+<h1 align="center">OAuth Securer</h1>
 
 <p align="center">
   <strong>Saint's Microsoft OAuth Securer</strong><br>
